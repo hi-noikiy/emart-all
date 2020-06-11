@@ -1,0 +1,192 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.fsd</groupId>
+  <artifactId>emart-all</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>emart-all</name>
+  
+  <!-- spring boot -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.6.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  
+  <!-- modules -->
+  <modules>
+  	<module>user-api</module>
+  	<module>common</module>
+  	<module>buyer-api</module>
+  	<module>seller-api</module>
+  	<module>eureka-server</module>
+  	<module>zuul-gateway</module>
+  </modules>
+  
+  <!--  Dependent version control  -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+    <spring.boot.version>2.2.6.RELEASE</spring.boot.version>
+    <lombok.version>1.18.12</lombok.version>
+    <mysql.version>8.0.19</mysql.version>
+    <jjwt.version>0.9.1</jjwt.version>
+    <jaxb-api.version>2.3.0</jaxb-api.version>
+    <common-lang3.version>3.3.2</common-lang3.version>
+    <commons-codec.version>1.10</commons-codec.version>
+    <common.version>0.0.1-SNAPSHOT</common.version>
+  </properties>
+  
+  <!--  Dependency management  -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.ibm.fsd</groupId>
+                <artifactId>common</artifactId>
+                <version>${common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring.boot.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test-autoconfigure</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <!-- apache common lang -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${common-lang3.version}</version>
+            </dependency>
+            <!-- Apache Commons Codec (TM) software provides implementations of
+             common encoders and decoders such as Base64, Hex, Phonetic and URLs. -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+            <dependency>
+            	<groupId>io.jsonwebtoken</groupId>
+            	<artifactId>jjwt</artifactId>
+            	<version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+            	<groupId>javax.xml.bind</groupId>
+            	<artifactId>jaxb-api</artifactId>
+            	<version>${jaxb-api.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <configuration>
+                        <finalName>${project.build.finalName}</finalName>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>aliyun-repos</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>jcenter</id>
+            <url>http://jcenter.bintray.com</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+  
+</project>

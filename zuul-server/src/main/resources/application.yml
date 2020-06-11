@@ -1,0 +1,37 @@
+server: 
+  port: 5001
+  
+spring:
+  application: 
+    name: zuul-gateway
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    
+#Custom route mapping
+zuul:
+  routes:
+    user-api: /user-api/**
+    buyer-api: /buyer-api/**
+    seller-api: /seller-api/**
+    
+hystrix:
+   command:
+      default:
+         execution:
+            isolation:
+               thread:
+                  timeout-in-milliseconds: 30000
+    
+ribbon:  
+   ReadTimeout: 30000
+   ConnectTimeout: 30000
+   
+logging:
+   level:
+      com.netflix: DEBUG
+      com.bruin.cloud.zuul.filters: DEBUG

@@ -1,0 +1,16 @@
+server: 
+  port: 6001
+  
+spring:
+  application: 
+    name: euraka-server
+ 
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true      #set the interaction address of eureka server, that is, the exposed address
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    register-with-eureka: false  #false: means that you do not register yourself with the registry
+    fetch-registry: false        #false: means that you are the registration center. Your responsibility is to maintain the instance and not participate in the retrieval

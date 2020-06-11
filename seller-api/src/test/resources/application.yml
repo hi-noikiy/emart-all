@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+  aop:
+    auto: true
+    proxy-target-class: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+jwt:
+  header: Authorization
+  secret: secret
+  expiration: 86400
+  tokenHead: "Bearer "
