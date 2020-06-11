@@ -9,6 +9,7 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+<<<<<<< HEAD
 
 ### STS ###
 .apt_generated
@@ -36,3 +37,5 @@ build/
 ### VS Code ###
 .vscode/
 /.metadata/
+=======
+>>>>>>> branch 'master' of https://github.com/lx-emart/emart-all.git
